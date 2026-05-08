@@ -12,13 +12,42 @@
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085'); 
             background-size: cover; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; color: white;
+            text-align: center;
         }
         .hero h1 { font-size: 3rem; margin-bottom: 0; }
         .hero p { font-size: 1.2rem; font-style: italic; }
-        .btn { background: #d4a373; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 20px; }
+        
+        /* El botón con duende */
+        .btn { 
+            background: #d4a373; 
+            color: white; 
+            padding: 15px 25px; 
+            text-decoration: none; 
+            border-radius: 5px; 
+            margin-top: 20px; 
+            cursor: pointer;
+            border: none;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+        .btn:hover { background: #b08254; }
+
         .section { padding: 40px; text-align: center; }
+        
+        /* Aquí está el truco: la carta empieza escondida */
+        #menu { 
+            display: none; 
+            background: white; 
+            animation: aparecer 0.8s ease-out;
+        }
+
+        @keyframes aparecer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .grid { display: flex; justify-content: space-around; flex-wrap: wrap; }
-        .card { width: 300px; padding: 20px; background: white; margin: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .card { width: 300px; padding: 20px; background: #fafafa; margin: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #eee; }
     </style>
 </head>
 <body>
@@ -30,9 +59,10 @@
 <section class="hero">
     <h1>Trazabilidad en cada gota</h1>
     <p>Café de especialidad con más de 85 puntos SCA</p>
-    <a href="#menu" class="btn">Ver la Carta</a>
+    <button onclick="mostrarMenu()" class="btn">Ver la Carta</button>
 </section>
-<section class="section" id="menu" style="background: white;">
+
+<section class="section" id="menu">
     <h2>Nuestra Carta</h2>
     <div class="grid">
         <div class="card">
@@ -55,9 +85,23 @@
         </div>
     </div>
 </section>
+
 <footer style="background: #1a1a1a; color: white; text-align: center; padding: 20px;">
     <p>&copy; 2026 El Templo del Grano - Hecho con flow para el barrio.</p>
 </footer>
+
+<script>
+    function mostrarMenu() {
+        var x = document.getElementById("menu");
+        if (x.style.display === "none" || x.style.display === "") {
+            x.style.display = "block";
+            // Esto hace que la página baje solita hasta la carta
+            x.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 
 </body>
 </html>
